@@ -29,7 +29,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>login</title>
+  <title>AQI_Flutter_Web_App</title>
   <link rel="manifest" href="manifest.json">
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIr6GekRXo8Mtjw0wtStBuchNtHMl8B5w"></script>
 </head>
@@ -38,7 +38,7 @@
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
-    var serviceWorkerVersion = '610475030';
+    var serviceWorkerVersion = '729749720';
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
@@ -57,9 +57,9 @@
         // Wait for registration to finish before dropping the <script> tag.
         // Otherwise, the browser will load the script multiple times,
         // potentially different versions.
-        navigator.serviceWorker.register('/firebase-messaging-sw.js');
+        //navigator.serviceWorker.register('/firebase-messaging-sw.js');
         var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
-        navigator.serviceWorker.register(serviceWorkerUrl)
+        navigator.serviceWorker.register('/firebase-messaging-sw.js')
           .then((reg) => {
             function waitForActivation(serviceWorker) {
               serviceWorker.addEventListener('statechange', () => {

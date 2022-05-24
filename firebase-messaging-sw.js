@@ -11,9 +11,29 @@ firebase.initializeApp({
     measurementId: "G-LBFE4NYZ1F"
 });
 
-const messaging = firebase.messaging();
 
-// Optional:
-messaging.onBackgroundMessage((message) => {
-  console.log("onBackgroundMessage", message);
+const messaging = firebase.messaging();
+messaging.setBackgroundMessageHandler(function (payload) {
+    const promiseChain = clients
+        .matchAll({
+            type: "window",
+            includeUncontrolled: true
+        })
+        .then(windowClients => {
+            for (let i = 0; i < windowClients.length; i++) {
+                const windowClient = windowClients[i];
+                windowClient.postMessage(payload);
+            }
+        })
+        .then(() => {
+            const title = payload.notification.title;
+            const options = {
+                body: payload.notification.score
+              };
+            return registration.showNotification(title, options);
+        });
+    return promiseChain;
+});
+self.addEventListener('notificationclick', function (event) {
+    console.log('notification received: ', event)
 });
